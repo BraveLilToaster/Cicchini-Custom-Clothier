@@ -1,0 +1,85 @@
+navbar
+  height: 4rem
+  width: 100%
+  position: fixed
+  background: $dark-primary
+  .logo-container
+    width: 4rem
+    height: 4rem
+    text-align: center
+    display: inline-block
+    .helper
+      display: inline-block
+      height: 100%
+      vertical-align: middle
+    img
+      vertical-align: middle
+      max-height: 2.5rem
+      max-width: 4rem
+.menu-button
+  @media #{ $small-only }
+    vertical-align: middle
+    padding: 1rem 1rem 1rem 0
+  @media #{ $medium-up }
+    display: none
+
+.sidenav
+  width: 230px
+  min-width: 230px
+  max-width: 230px
+  box-sizing: border-box
+  position: absolute
+  +vendor-prefix(flex-direction, column)
+  z-index: 60
+  bottom: 0
+  overflow: auto
+.sidenav-open
+  left: 0
+  top: 0
+  +vendor-prefix(transform, translate3d(0,0,0))
+  box-shadow: 0 2px 4px -1px rgba(0,0,0,.2),0 4px 5px 0 rgba(0,0,0,.14),0 1px 10px 0 rgba(0,0,0,.12)
+.sidenav-closed
+  left: 0
+  top: 0
+  +vendor-prefix(transform, translate3d(100%,0,0))
+  display: none
+
+.center-menu
+  padding: 0 1rem
+  margin: 0 auto
+  max-width: 780px
+  position: relative
+.horizontalmenu
+  @media #{ $small-only }
+    display: none
+  display: inline-block
+  vertical-align: middle
+  position: absolute
+  right: 1rem
+  top: 16px
+  ul
+    padding: 0
+    margin: 0
+    list-style: none
+  li
+    float: left
+    padding-left: 1rem
+    display: block
+    color: #fff
+    font-weight: 600
+    a
+      text-decoration: none
+      color: #fff
+      text-shadow: 1px 1px 0 #333
+      font-size: 1.2rem
+    ul
+      display: none
+      position: absolute
+    &:hover ul
+      display: block
+      background: none
+      height: auto
+      width: 8em
+    ul li
+      clear: both
+      border-style: none
