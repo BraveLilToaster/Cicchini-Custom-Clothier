@@ -23,6 +23,18 @@ gulp.task('copy:html', function() {
     .pipe(gulp.dest(buildDir));
 })
 
+// Copies static js from ./src to build dir
+gulp.task('copy:js', function() {
+  return gulp.src(srcDir + '/**/*.js')
+    .pipe(gulp.dest(buildDir));
+})
+
+// Copies static slick from ./src to build dir
+gulp.task('copy:slick', function() {
+  return gulp.src(srcDir + '/css/ajax-loader.gif')
+    .pipe(gulp.dest(buildDir));
+})
+
 // Copies static assets from ./src/img to build dir
 gulp.task('copy:assets', function() {
   return gulp.src(srcDir + '/img/**/*')
@@ -30,7 +42,7 @@ gulp.task('copy:assets', function() {
 });
 
 // Wrapper tasks for building
-gulp.task('static', ['copy:html', 'copy:assets']);
+gulp.task('static', ['copy:html', 'copy:js', 'copy:assets', 'copy:slick']);
 gulp.task('build', ['clean', 'sass', 'static']);
 
 // Serve locally and watch for changes

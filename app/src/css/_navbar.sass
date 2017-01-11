@@ -1,21 +1,77 @@
 navbar
+  background: $dark-primary
   height: 4rem
   width: 100%
   position: fixed
-  background: $dark-primary
-  .logo-container
-    width: 4rem
-    height: 4rem
-    text-align: center
-    display: inline-block
-    .helper
-      display: inline-block
-      height: 100%
-      vertical-align: middle
-    img
-      vertical-align: middle
-      max-height: 2.5rem
-      max-width: 4rem
+  z-index: 999
+  ul
+    margin: 0
+    padding: 0
+    list-style-type: none
+    max-height: 100vh
+    overflow: hidden
+    @include prefix((transition: max-height 0.8s, transition-timing-function: cubic-bezier(0.42, 0, 0.58, 1)), webkit moz ms)
+    @media #{$small-only}
+      background: $dark-primary
+      position: absolute
+      top: 64px
+      width: 100%
+      box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.16), 0 4px 10px 0 rgba(0, 0, 0, 0.12)
+    @media #{$medium-up}
+      padding: 20px 8px
+      float: right
+    li
+      @media #{$medium-up}
+        display: inline
+      a
+        @extend .basic-link
+        padding: 16px 20px
+        width: 100%
+        height: 100%
+        display: block
+        @include prefix((transition: background 0.3s, transition-timing-function: cubic-bezier(0.42, 0, 0.58, 1)), webkit moz ms)
+        &:hover
+          background: $dark-secondary
+          font-weight: 300
+
+        @media #{$medium-up}
+          padding: 8px 8px
+          border-radius: 2px
+          display: inline
+.logo
+  height: 48px
+  padding: 8px 16px
+  @media #{$medium-up}
+    padding-right: 0
+.logo-container
+  display: inline
+  @media #{$small-only}
+    width: 75px
+    margin: auto
+    position: absolute
+    top: 0
+    right: 0
+    left: 0
+.menu-icon
+  height: 32px
+  padding: 8px
+  margin: 8px
+  cursor: pointer
+  border-radius: 100%
+  @include prefix((transition: background 0.5s, transition-timing-function: cubic-bezier(0.42, 0, 0.58, 1)), webkit moz ms)
+  &:hover
+    background: $dark-secondary
+  @media #{$medium-up}
+    display: none
+.hide-menu
+  max-height: 0
+  @media #{$medium-up}
+    max-height: 100%
+    display: inherit
+.basic-link
+  color: #fff
+  text-decoration: none
+
 .menu-button
   @media #{ $small-only }
     vertical-align: middle

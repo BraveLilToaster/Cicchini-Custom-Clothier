@@ -1,0 +1,98 @@
+body
+  margin: 0
+  background-color: $blue-50
+  min-width: 320px
+  font-family: "Lato", "Helvetica", "Arial", sans-serif
+  line-height: 1
+  letter-spacing: .02em
+input
+  font-family: "Open-sans", "Helvetica", "Arial", sans-serif
+  border: none
+  margin: 0
+  padding: 0
+  &:focus
+    outline: 0
+
+.valign-wrapper
+  display: flex !important
+  align-items: center
+  .valign
+    display: block
+
+/* Hide and Show Attributes
+.hide
+  display: none
+.hide-sm
+  @media #{ $small-only }
+    display: none
+.hide-gt-sm
+  @media #{ $small-up }
+    display: none
+.hide-md
+  @media #{ $medium-only }
+    display: none
+.hide-gt-md
+  @media #{ $medium-up }
+    display: none
+.hide-lg
+  @media #{ $large-only }
+    display: none
+.hide-gt-lg
+  @media #{ $large-only }
+    display: none
+
+.button
+  text-decoration: none
+  border: none
+  border-radius: 2px
+  text-align: center
+  letter-spacing: .5px
+  cursor: pointer
+  outline: 0
+  transition: .2s ease-out
+.cta-button
+  @extend .button
+  font-size: 1.2rem
+  padding: 1rem 2rem
+  color: #fff
+  background-color: $indigo-500
+  width: 100%
+  text-transform: uppercase
+  font-weight: bold
+
+.hero-form
+  padding: 1rem
+  background: $light-secondary
+  border-radius: 2px
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26)
+  @media #{ $medium-up }
+    max-width: 760px
+    margin: 0 auto
+  h2
+    color: $dark-blue
+    margin: 1rem 0 2rem
+  .text-field
+    overflow: hidden
+  input[type="text"]
+    color: $dark-primary
+    font-size: 1rem
+    width: 100%
+    padding: 1rem
+    margin-bottom: 1rem
+    border-radius: 3px
+    border-bottom: solid 2px $dark-disabled
+    box-sizing : border-box
+    +vendor-prefix(transition, border 0.5s)
+    &:focus
+      outline: none
+      border-bottom: solid 2px $dark-blue
+.hero-form-button
+  @extend .button
+  font-size: 1.2rem
+  padding: 1rem 2rem
+  color: #fff
+  background-color: $light-blue
+  width: 100%
+  text-transform: uppercase
+  font-family: 'poppins', sans-serif
+  font-weight: bold

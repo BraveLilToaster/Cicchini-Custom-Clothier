@@ -1,92 +1,9 @@
+@import "slick.scss"
+@import "slick-theme.scss"
+
 @import "values.sass"
+@import "mixins.scss"
+@import "site.sass"
+
 @import "navbar.sass"
-
-body
-  margin: 0
-  background-color: $blue-50
-  min-width: 320px
-  font-family: "Open-sans", "Helvetica", "Arial", sans-serif
-  line-height: 1
-  letter-spacing: .02em
-input
-  font-family: "Open-sans", "Helvetica", "Arial", sans-serif
-  border: none
-  margin: 0
-  padding: 0
-  &:focus
-    outline: 0
-.org
-  font-size: 2em;
-  color: $dark-blue
-  text-transform: uppercase
-  font-family: 'Poppins', sans-serif
-  font-weight: 600
-  span
-    font-family: 'Open Sans', sans-serif
-    color: $light-primary
-    font-weight: 300
-.hero
-  background: url(../img/SOL.jpeg) top center no-repeat
-  background-size: cover
-  padding: 1rem
-  padding-top: 5rem
-  @media #{ $small-only }
-    min-height: calc(100vh - 6rem)
-  @media #{ $medium-up }
-    height: 40rem
-  @media #{ $large-up }
-  h1
-    text-align: center
-    font-size: 3rem
-    margin-top: 15px
-    @media #{ $small-only }
-      margin: 1rem 0
-    @media #{ $medium-up }
-      font-size: 3rem
-.hero-form
-  padding: 1rem
-  background: $light-secondary
-  border-radius: 2px
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26)
-  @media #{ $medium-up }
-    max-width: 760px
-    margin: 0 auto
-  h2
-    color: $dark-blue
-    margin: 1rem 0 2rem
-  .text-field
-    overflow: hidden
-  input[type="text"]
-    color: $dark-primary
-    font-size: 1rem
-    width: 100%
-    padding: 1rem
-    margin-bottom: 1rem
-    border-radius: 3px
-    border-bottom: solid 2px $dark-disabled
-    box-sizing : border-box
-    +vendor-prefix(transition, border 0.5s)
-    &:focus
-      outline: none
-      border-bottom: solid 2px $dark-blue
-
-.button
-  text-decoration: none
-  border: none
-  border-radius: 2px
-  text-align: center
-  letter-spacing: .5px
-  cursor: pointer
-  outline: 0
-  transition: .2s ease-out
-.hero-form-button
-  @extend .button
-  font-size: 1.2rem
-  padding: 1rem 2rem
-  color: #fff
-  background-color: $light-blue
-  width: 100%
-  text-transform: uppercase
-  font-family: 'Poppins', sans-serif
-  font-weight: bold
-  @media #{ $medium-up }
+@import "slider.sass"
