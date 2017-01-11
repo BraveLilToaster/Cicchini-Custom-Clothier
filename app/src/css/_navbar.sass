@@ -33,7 +33,8 @@ navbar
         display: block
         @include prefix((transition: background 0.3s, transition-timing-function: cubic-bezier(0.42, 0, 0.58, 1)), webkit moz ms)
         &:hover
-          background: $dark-secondary
+          color: $dark-primary
+          background: $light-secondary
           font-weight: 300
 
         @media #{$medium-up}
@@ -42,8 +43,9 @@ navbar
           display: inline
 .logo
   height: 48px
-  padding: 8px 16px
+  padding: 8px 1rem
   @media #{$medium-up}
+    padding: 8px 2rem
     padding-right: 0
 .logo-container
   display: inline

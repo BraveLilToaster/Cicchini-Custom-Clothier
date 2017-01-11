@@ -1,6 +1,6 @@
 body
   margin: 0
-  background-color: $blue-50
+  background-color: $light-primary
   min-width: 320px
   font-family: "Lato", "Helvetica", "Arial", sans-serif
   line-height: 1
@@ -12,6 +12,30 @@ input
   padding: 0
   &:focus
     outline: 0
+footer
+  padding: 1rem 2rem
+  background: $dark-primary
+  color: $light-primary
+
+.content
+  padding: 0 2rem
+  @media #{$medium-up}
+    margin: 0 auto
+    &.content-sm
+      max-width: 600px
+    &.content-md
+      max-width: 960px
+    &.content-lg
+      max-width: 1280px
+.section
+  margin: 2rem 0
+  h1
+    font-size: 2.2rem
+    letter-spacing: .2rem
+    text-align: center
+  p
+    line-height: 2rem
+    letter-spacing: 1px
 
 .valign-wrapper
   display: flex !important
@@ -59,7 +83,6 @@ input
   width: 100%
   text-transform: uppercase
   font-weight: bold
-  letter-spacing: .2rem
 
 .hero-form
   padding: 1rem

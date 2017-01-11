@@ -205,7 +205,7 @@
 
 body {
   margin: 0;
-  background-color: #E3F2FD;
+  background-color: white;
   min-width: 320px;
   font-family: "Lato", "Helvetica", "Arial", sans-serif;
   line-height: 1;
@@ -218,6 +218,33 @@ input {
   padding: 0; }
   input:focus {
     outline: 0; }
+
+footer {
+  padding: 1rem 2rem;
+  background: rgba(0, 0, 0, 0.87);
+  color: white; }
+
+.content {
+  padding: 0 2rem; }
+  @media only screen and (min-width: 601px) {
+    .content {
+      margin: 0 auto; }
+      .content.content-sm {
+        max-width: 600px; }
+      .content.content-md {
+        max-width: 960px; }
+      .content.content-lg {
+        max-width: 1280px; } }
+
+.section {
+  margin: 2rem 0; }
+  .section h1 {
+    font-size: 2.2rem;
+    letter-spacing: .2rem;
+    text-align: center; }
+  .section p {
+    line-height: 2rem;
+    letter-spacing: 1px; }
 
 .valign-wrapper {
   display: flex !important;
@@ -270,8 +297,7 @@ input {
   background-color: #3F51B5;
   width: 100%;
   text-transform: uppercase;
-  font-weight: bold;
-  letter-spacing: .2rem; }
+  font-weight: bold; }
 
 .hero-form {
   padding: 1rem;
@@ -314,6 +340,16 @@ input {
   text-transform: uppercase;
   font-family: 'poppins', sans-serif;
   font-weight: bold; }
+
+.social-icons {
+  width: 100%;
+  text-align: center;
+  margin: 0 0 1rem; }
+  .social-icons a {
+    width: 48px;
+    padding: 1rem; }
+    .social-icons a img {
+      width: 48px; }
 
 navbar {
   background: rgba(0, 0, 0, 0.87);
@@ -365,7 +401,8 @@ navbar {
       -ms-transition-timing-function: cubic-bezier(0.42, 0, 0.58, 1);
       transition-timing-function: cubic-bezier(0.42, 0, 0.58, 1); }
       navbar ul li a:hover {
-        background: rgba(0, 0, 0, 0.54);
+        color: rgba(0, 0, 0, 0.87);
+        background: rgba(255, 255, 255, 0.7);
         font-weight: 300; }
       @media only screen and (min-width: 601px) {
         navbar ul li a {
@@ -375,9 +412,10 @@ navbar {
 
 .logo {
   height: 48px;
-  padding: 8px 16px; }
+  padding: 8px 1rem; }
   @media only screen and (min-width: 601px) {
     .logo {
+      padding: 8px 2rem;
       padding-right: 0; } }
 
 .logo-container {
@@ -509,7 +547,7 @@ navbar {
       border-style: none; }
 
 .slick-prev {
-  left: 15px;
+  left: 1rem;
   z-index: 100;
   height: 48px;
   width: 48px; }
@@ -520,7 +558,7 @@ navbar {
         display: none; } }
 
 .slick-next {
-  right: 15px;
+  right: 1rem;
   z-index: 100;
   height: 48px;
   width: 48px; }
@@ -546,7 +584,7 @@ navbar {
   padding: 0 1.2rem 1.2rem;
   text-align: center;
   width: 100%; }
-  .slide-content h2 {
+  .slide-content h1 {
     font-size: 2.2rem;
     margin-top: 0;
     letter-spacing: .2rem; }
