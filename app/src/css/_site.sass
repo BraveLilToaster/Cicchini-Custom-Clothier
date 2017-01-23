@@ -12,13 +12,20 @@ input
   padding: 0
   &:focus
     outline: 0
+h1
+  font-size: 2.2em
+  letter-spacing: .2em
+  text-align: center
+p
+  line-height: 2em
+  letter-spacing: 1px
 footer
-  padding: 1rem 2rem
+  padding: 1em 2em
   background: $dark-primary
   color: $light-primary
 
 .content
-  padding: 0 2rem
+  padding: 0 2em
   @media #{$medium-up}
     margin: 0 auto
     &.content-sm
@@ -28,20 +35,26 @@ footer
     &.content-lg
       max-width: 1280px
 .section
-  margin: 2rem 0
-  h1
-    font-size: 2.2rem
-    letter-spacing: .2rem
-    text-align: center
-  p
-    line-height: 2rem
-    letter-spacing: 1px
+  margin: 3em 0
 
+.clearfix
+  &::before
+    content: ""
+    display: table
+  &::after
+    content: ""
+    display: table
+    clear: both
+  zoom: 1
+  /* For IE 6/7 (trigger hasLayout)
 .valign-wrapper
   display: flex !important
   align-items: center
   .valign
     display: block
+
+.halign-wrapper
+  text-align: center
 
 /* Hide and Show Attributes
 .hide
@@ -76,13 +89,33 @@ footer
   transition: .2s ease-out
 .cta-button
   @extend .button
-  font-size: 1.2rem
-  padding: 1rem 2rem
+  font-size: 1.2em
+  padding: 1rem 2em
   color: #fff
   background-color: $indigo-500
-  width: 100%
   text-transform: uppercase
   font-weight: bold
+  letter-spacing: .2em
+.testimonial
+  @media #{ $small-only }
+    text-align: center
+    margin-bottom: 2em
+  @media #{ $medium-up }
+    margin-bottom: 3em
+  .testimonial-image
+    @media #{ $medium-up }
+      display: inline-block
+      float: left
+      padding-right: 2em
+  p
+    display: inline-block
+    @media #{ $medium-up }
+      display: inline-block
+      +calc(width,'100% - 160px')
+    span
+      font-size: 1.2em
+      @media #{ $medium-up }
+        float: right
 
 .hero-form
   padding: 1rem
@@ -94,15 +127,15 @@ footer
     margin: 0 auto
   h2
     color: $dark-blue
-    margin: 1rem 0 2rem
+    margin: 1em 0 2em
   .text-field
     overflow: hidden
   input[type="text"]
     color: $dark-primary
-    font-size: 1rem
+    font-size: 1em
     width: 100%
-    padding: 1rem
-    margin-bottom: 1rem
+    padding: 1em
+    margin-bottom: 1em
     border-radius: 3px
     border-bottom: solid 2px $dark-disabled
     box-sizing : border-box
@@ -112,8 +145,8 @@ footer
       border-bottom: solid 2px $dark-blue
 .hero-form-button
   @extend .button
-  font-size: 1.2rem
-  padding: 1rem 2rem
+  font-size: 1.2em
+  padding: 1em 2em
   color: #fff
   background-color: $light-blue
   width: 100%

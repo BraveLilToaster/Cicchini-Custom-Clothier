@@ -219,13 +219,22 @@ input {
   input:focus {
     outline: 0; }
 
+h1 {
+  font-size: 2.2em;
+  letter-spacing: .2em;
+  text-align: center; }
+
+p {
+  line-height: 2em;
+  letter-spacing: 1px; }
+
 footer {
-  padding: 1rem 2rem;
+  padding: 1em 2em;
   background: rgba(0, 0, 0, 0.87);
   color: white; }
 
 .content {
-  padding: 0 2rem; }
+  padding: 0 2em; }
   @media only screen and (min-width: 601px) {
     .content {
       margin: 0 auto; }
@@ -237,20 +246,27 @@ footer {
         max-width: 1280px; } }
 
 .section {
-  margin: 2rem 0; }
-  .section h1 {
-    font-size: 2.2rem;
-    letter-spacing: .2rem;
-    text-align: center; }
-  .section p {
-    line-height: 2rem;
-    letter-spacing: 1px; }
+  margin: 3em 0; }
+
+.clearfix {
+  zoom: 1;
+  /* For IE 6/7 (trigger hasLayout) */ }
+  .clearfix::before {
+    content: "";
+    display: table; }
+  .clearfix::after {
+    content: "";
+    display: table;
+    clear: both; }
 
 .valign-wrapper {
   display: flex !important;
   align-items: center; }
   .valign-wrapper .valign {
     display: block; }
+
+.halign-wrapper {
+  text-align: center; }
 
 /* Hide and Show Attributes */
 .hide {
@@ -280,7 +296,7 @@ footer {
   .hide-gt-lg {
     display: none; } }
 
-.button, .cta-button, .hero-form-button {
+.button, .cta-button, .hero-form-button, .signup-button {
   text-decoration: none;
   border: none;
   border-radius: 2px;
@@ -291,13 +307,44 @@ footer {
   transition: .2s ease-out; }
 
 .cta-button {
-  font-size: 1.2rem;
-  padding: 1rem 2rem;
+  font-size: 1.2em;
+  padding: 1rem 2em;
   color: #fff;
   background-color: #3F51B5;
-  width: 100%;
   text-transform: uppercase;
-  font-weight: bold; }
+  font-weight: bold;
+  letter-spacing: .2em; }
+
+@media only screen and (max-width: 600px) {
+  .testimonial {
+    text-align: center;
+    margin-bottom: 2em; } }
+
+@media only screen and (min-width: 601px) {
+  .testimonial {
+    margin-bottom: 3em; } }
+
+@media only screen and (min-width: 601px) {
+  .testimonial .testimonial-image {
+    display: inline-block;
+    float: left;
+    padding-right: 2em; } }
+
+.testimonial p {
+  display: inline-block; }
+  @media only screen and (min-width: 601px) {
+    .testimonial p {
+      display: inline-block;
+      width: -o-calc(100% - 160px);
+      width: -ms-calc(100% - 160px);
+      width: -moz-calc(100% - 160px);
+      width: -webkit-calc(100% - 160px);
+      width: calc(100% - 160px); } }
+  .testimonial p span {
+    font-size: 1.2em; }
+    @media only screen and (min-width: 601px) {
+      .testimonial p span {
+        float: right; } }
 
 .hero-form {
   padding: 1rem;
@@ -310,15 +357,15 @@ footer {
       margin: 0 auto; } }
   .hero-form h2 {
     color: #1B3C5E;
-    margin: 1rem 0 2rem; }
+    margin: 1em 0 2em; }
   .hero-form .text-field {
     overflow: hidden; }
   .hero-form input[type="text"] {
     color: rgba(0, 0, 0, 0.87);
-    font-size: 1rem;
+    font-size: 1em;
     width: 100%;
-    padding: 1rem;
-    margin-bottom: 1rem;
+    padding: 1em;
+    margin-bottom: 1em;
     border-radius: 3px;
     border-bottom: solid 2px rgba(0, 0, 0, 0.38);
     box-sizing: border-box;
@@ -332,8 +379,8 @@ footer {
       border-bottom: solid 2px #1B3C5E; }
 
 .hero-form-button {
-  font-size: 1.2rem;
-  padding: 1rem 2rem;
+  font-size: 1.2em;
+  padding: 1em 2em;
   color: #fff;
   background-color: #62B2DB;
   width: 100%;
@@ -341,15 +388,153 @@ footer {
   font-family: 'poppins', sans-serif;
   font-weight: bold; }
 
-.social-icons {
-  width: 100%;
+.social-icons-top, .social-icons-bottom {
   text-align: center;
-  margin: 0 0 1rem; }
-  .social-icons a {
+  margin: 0 0 1rem;
+  width: 100%; }
+  @media only screen and (min-width: 601px) {
+    .social-icons-top, .social-icons-bottom {
+      display: inline-block; } }
+  .social-icons-top a, .social-icons-bottom a {
     width: 48px;
-    padding: 1rem; }
-    .social-icons a img {
+    padding: 1rem;
+    text-decoration: none; }
+    .social-icons-top a img, .social-icons-bottom a img {
       width: 48px; }
+      .social-icons-top a img.facebook, .social-icons-bottom a img.facebook {
+        fill: rgba(78, 113, 168, 0);
+        -webkit-transition: fill 0.3s;
+        -moz-transition: fill 0.3s;
+        -ms-transition: fill 0.3s;
+        transition: fill 0.3s;
+        -webkit-transition-timing-function: cubic-bezier(0.42, 0, 0.58, 1);
+        -moz-transition-timing-function: cubic-bezier(0.42, 0, 0.58, 1);
+        -ms-transition-timing-function: cubic-bezier(0.42, 0, 0.58, 1);
+        transition-timing-function: cubic-bezier(0.42, 0, 0.58, 1); }
+      .social-icons-top a img:hover .facebook, .social-icons-bottom a img:hover .facebook {
+        fill: #4e71a8; }
+
+.phone, .address, .copyright {
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  font-size: 1.1rem; }
+
+.address address {
+  font-style: normal; }
+
+/* MailChimp Form Embed Code - Slim - 12/15/2015 v10.7 */
+#mc_embed_signup form {
+  display: block;
+  position: relative;
+  text-align: left; }
+
+#mc_embed_signup input {
+  -webkit-appearance: none; }
+  #mc_embed_signup input[type=checkbox] {
+    -webkit-appearance: checkbox; }
+  #mc_embed_signup input[type=radio] {
+    -webkit-appearance: radio; }
+
+#mc_embed_signup .button, #mc_embed_signup .cta-button, #mc_embed_signup .hero-form-button, #mc_embed_signup .signup-button {
+  clear: both;
+  border: 0 none;
+  cursor: pointer;
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: top;
+  white-space: nowrap;
+  width: auto;
+  transition: all 0.23s ease-in-out 0s; }
+
+#mc_embed_signup .clear {
+  clear: none;
+  display: inline; }
+
+#mc_embed_signup div#mce-responses {
+  float: left;
+  top: -1.4em;
+  padding: 0em .5em 0em .5em;
+  overflow: hidden;
+  width: 90%;
+  margin: 0 5%;
+  clear: both; }
+
+#mc_embed_signup div.response {
+  margin: 1em 0;
+  padding: 1em .5em .5em 0;
+  font-weight: bold;
+  float: left;
+  top: -1.5em;
+  z-index: 1;
+  width: 80%; }
+
+#mc_embed_signup #mce-error-response {
+  display: none; }
+
+#mc_embed_signup #mce-success-response {
+  color: #529214;
+  display: none; }
+
+#mc_embed_signup label.error {
+  display: block;
+  float: none;
+  width: auto;
+  margin-left: 1.05em;
+  text-align: left;
+  padding: .5em 0; }
+
+/* End MailChimp Form Embed Code - Slim - 12/15/2015 v10.7 */
+.newsletter {
+  background: rgba(0, 0, 0, 0.87);
+  padding: 2em; }
+  .newsletter h2 {
+    margin: 0;
+    padding: 0 0 1em 0;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    font-size: 1.4em; }
+
+.newsletter-form {
+  margin: 0 auto;
+  max-width: 600px;
+  position: relative; }
+
+.newsletter-input {
+  height: 53px;
+  font-size: 1.2em;
+  padding: 0 .8em;
+  display: inline-block;
+  -webkit-border-radius: 3px 0 0 3px;
+  -ms-border-radius: 3px 0 0 3px;
+  -moz-border-radius: 3px 0 0 3px;
+  -o-border-radius: 3px 0 0 3px;
+  border-radius: 3px 0 0 3px;
+  width: -o-calc(100% - 155px);
+  width: -ms-calc(100% - 155px);
+  width: -moz-calc(100% - 155px);
+  width: -webkit-calc(100% - 155px);
+  width: calc(100% - 155px); }
+
+.signup-button {
+  height: 53px;
+  font-size: 1em;
+  padding: .8em;
+  color: #fff;
+  background-color: #3F51B5;
+  text-transform: uppercase;
+  font-weight: bold;
+  display: inline-block;
+  float: right;
+  position: absolute;
+  border-radius: 0px 3px 3px 0px;
+  -webkit-border-radius: 0 3px 3px 0;
+  -ms-border-radius: 0 3px 3px 0;
+  -moz-border-radius: 0 3px 3px 0;
+  -o-border-radius: 0 3px 3px 0;
+  border-radius: 0 3px 3px 0; }
 
 navbar {
   background: rgba(0, 0, 0, 0.87);
@@ -456,7 +641,7 @@ navbar {
       max-height: 100%;
       display: inherit; } }
 
-.basic-link, navbar ul li a {
+.basic-link, .phone a, navbar ul li a {
   color: #fff;
   text-decoration: none; }
 
@@ -569,13 +754,27 @@ navbar {
       .slick-next:before {
         display: none; } }
 
+.slide-background-1 {
+  background: url("../img/Cicchini Custom Clothier Photos Web Size-218.jpg") center center no-repeat;
+  background-size: cover; }
+
+.slide-background-2 {
+  background: url("../img/Cicchini Custom Clothier Photos Web Size-284.jpg") top center no-repeat;
+  background-size: cover; }
+
+.slide-background-3 {
+  background: url("../img/Cicchini Custom Clothier Photos Web Size-17.jpg") top center no-repeat;
+  background-size: cover; }
+
+.slide-background-4 {
+  background: url("../img/Cicchini Custom Clothier Photos Web Size-25.jpg") top center no-repeat;
+  background-size: cover; }
+
 .slide-pane {
-  background: url(../img/SOL.jpeg) top center no-repeat;
-  background-size: cover;
   padding-top: 4rem; }
   @media only screen and (max-width: 600px) {
     .slide-pane {
-      min-height: calc(100vh - 10rem); } }
+      min-height: calc(100vh - 5rem); } }
   @media only screen and (min-width: 601px) {
     .slide-pane {
       height: 40rem; } }
@@ -583,7 +782,8 @@ navbar {
 .slide-content {
   padding: 0 1.2rem 1.2rem;
   text-align: center;
-  width: 100%; }
+  width: 100%;
+  color: white; }
   .slide-content h1 {
     font-size: 2.2rem;
     margin-top: 0;
@@ -592,5 +792,3 @@ navbar {
     font-size: 1.4rem;
     margin-bottom: 3rem;
     letter-spacing: .1rem; }
-  .slide-content .cta-button {
-    letter-spacing: .2rem; }
