@@ -1,8 +1,7 @@
-.social-icons-top, .social-icons-bottom
+.social-icons
   text-align: center
+.social-icons-top, .social-icons-bottom
   margin: 0 0 1rem
-  width: 100%
-  @media #{ $small-only }
   @media #{ $medium-up }
     display: inline-block
   a
@@ -11,6 +10,7 @@
     text-decoration: none
     img
       width: 48px
+      cursor: pointer
       &.facebook
         fill: rgba(78, 113, 168, 0)
         @include prefix((transition: fill 0.3s, transition-timing-function: cubic-bezier(0.42, 0, 0.58, 1)), webkit moz ms)

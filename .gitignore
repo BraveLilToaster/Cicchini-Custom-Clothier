@@ -15,3 +15,5 @@ Session.vim
 tags
 
 node_modules
+
+app/dist/*

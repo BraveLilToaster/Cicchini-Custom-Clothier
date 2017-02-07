@@ -107,6 +107,24 @@ a
   line-height: 1.3
   &:hover
     background-color: $color-primary-hover
+
+// Responsize embedded container
+.embed-container
+  position: relative
+  overflow: hidden
+  max-width: 100%
+  &.map
+    height: 25em
+  &.video
+    padding-bottom: 56.25%
+    height: 0
+  iframe, object, embed
+    position: absolute
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+
 .testimonial
   @media #{ $small-only }
     text-align: center
