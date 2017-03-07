@@ -1,9 +1,15 @@
 navbar
   background: $dark-primary
-  height: 4rem
+  height: $nav-height
   width: 100%
   position: fixed
+  top: 0
+  left: 0
   z-index: 999
+  &:after
+    content: ''
+  display: block
+  clear: both
   ul
     margin: 0
     padding: 0

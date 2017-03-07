@@ -26,8 +26,14 @@ footer
 a
   text-decoration: none
 
-.container
-  padding-top: 4em
+.wrapper
+  position: relative
+  width: 100%
+  min-height: 100%
+  padding-top: $nav-height
+  z-index: 2
+  -webkit-transition: all .5s ease-in-out
+  transition: all .5s ease-in-out
 .content
   padding: 0 2em
   @media #{$medium-up}
@@ -63,6 +69,22 @@ a
 .halign-wrapper
   text-align: center
 
+.center-vh
+  position: relative
+  top: 50%
+  left: 50%
+  -webkit-font-smoothing: subpixel-antialiased
+  +vendor-prefix(transform, translate(-50%, -50%))
+.center-v
+  position: relative
+  top: 50%
+  -webkit-font-smoothing: subpixel-antialiased
+  +vendor-prefix(transform, translateY(-50%))
+.center-h
+  left: 50%
+  -webkit-font-smoothing: subpixel-antialiased
+  +vendor-prefix(transform, translateX(-50%))
+
 /* Hide and Show Attributes
 .hide
   display: none
@@ -70,13 +92,13 @@ a
   @media #{ $small-only }
     display: none
 .hide-gt-sm
-  @media #{ $small-up }
+  @media #{ $medium-up }
     display: none
 .hide-md
   @media #{ $medium-only }
     display: none
 .hide-gt-md
-  @media #{ $medium-up }
+  @media #{ $large-up }
     display: none
 .hide-lg
   @media #{ $large-only }
