@@ -15,5 +15,8 @@
     "gulp-sass": "^3.0.0",
     "gulp-server-livereload": "^1.9.2",
     "gulp-watch": "^4.3.11"
+  },
+  "dependencies": {
+    "smooth-scroll": "github:cferdinandi/smooth-scroll"
   }
 }
