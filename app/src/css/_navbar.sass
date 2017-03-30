@@ -54,6 +54,7 @@ navbar
 .logo
   height: 3em
   padding: .5em 0
+  box-sizing: initial
   @media #{$medium-up}
     padding: .5em 2rem
     padding-right: 0
@@ -72,6 +73,7 @@ navbar
   margin: 8px
   cursor: pointer
   border-radius: 100%
+  box-sizing: initial
   @include prefix((transition: background 0.5s, transition-timing-function: cubic-bezier(0.42, 0, 0.58, 1)), webkit moz ms)
   &:hover
     background: $dark-secondary

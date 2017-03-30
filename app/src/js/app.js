@@ -27,6 +27,11 @@
       console.info('menu open');
     }
   }
+  var scrollTo = function(link){
+    console.info("scrolling to "+ link);
+    $('html, body').animate({scrollTop: $(link).offset().top -100 }, 'slow');
+  }
+
   var initializeParallax = function(){
     if ($(window).width() < 600 && vm.parallaxOn) {
       turnOffParallax();
@@ -63,6 +68,14 @@
       });
       vm.pslider.destroy();
   }
+  smoothScroll.init({
+    selector: '[data-scroll]', // Selector for links (must be a class, ID, data attribute, or element tag)
+    selectorHeader: null, // Selector for fixed headers (must be a valid CSS selector) [optional]
+    speed: 500, // Integer. How fast to complete the scroll in milliseconds
+    easing: 'easeInOutCubic', // Easing pattern to use
+    offset: 80, // Integer. How far to offset the scrolling anchor location in pixels
+    callback: function ( anchor, toggle ) {} // Function to run after scrolling
+  });
   $(window).resize(function() {
     initializeParallax();
   });
