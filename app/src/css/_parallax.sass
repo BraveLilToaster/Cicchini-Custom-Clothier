@@ -1,31 +1,22 @@
+.parallax
+  position: relative
+  &:after
+    content: ""
+    display: block
+    @media #{$medium-up}
+      margin-bottom: 3em
 .parallax-window
   position: relative
   height: 400px
   @media #{$medium-up}
-    height: 800px
+    height: 600px
 .parallax-slider
   position: absolute
+  top: 0
   height: 400px
   width: 100%
   @media #{$medium-up}
     height: 600px
-.parallax-title
-  @media #{$small-only}
-    text-align: center
-    font-size: 3em
-    text-shadow: 2px 2px 7px rgba(0, 0, 0, 0.87)
-.parallax-image
-  background-position: center top
-  width: 100%
-  height: 400px
-  background-repeat: no-repeat
-  background-position: center top
-  background-size: cover
-  display: block
-  @media #{$medium-up}
-    height: 667px
-  @media #{$large-up}
-    height: 800px
 .parallax-content
   color: $light-primary
   text-shadow: 2px 1px 1px $dark-primary
@@ -33,7 +24,15 @@
     padding: 0 7em
   @media #{$large-up}
     padding: 0 16em
-
+.parallax-title
+  margin-top: 0
+  &.header
+    text-align: center
+    font-size: 3em
+  @media #{$small-only}
+    text-align: center
+    font-size: 3em
+    text-shadow: 2px 2px 7px rgba(0, 0, 0, 0.87)
 .feature
   margin-bottom: 3em
 .feature-text
@@ -41,18 +40,12 @@
 .feature-images
   position: relative
   background: #fff
-  &.feature-images--small .image
-    height: 320px
-  &.feature-images--parallax
-    height: 400px
-    overflow: hidden
   .row
     margin: 0
   .col
     padding: 0
   .image-responsive
     width: 100%
-
   .image
     content: ''
     position: relative
@@ -62,55 +55,3 @@
     background-position: center
     background-size: cover
     text-align: center
-  .image--parallax
-    position: absolute
-    height: 110%
-    width: 100%
-    background-repeat: no-repeat
-    background-position: center
-    background-size: cover
-  .feature-image-content
-    -webkit-transform: translateX(-50%)
-    -moz-transform: translateX(-50%)
-    -ms-transform: translateX(-50%)
-    -o-transform: translateX(-50%)
-    transform: translateX(-50%)
-    position: absolute
-    bottom: 8%
-    left: 50%
-    width: 95%
-    padding: 0 15px
-    text-align: center
-    h3
-      letter-spacing: 1px
-      font-size: 3.2rem
-      font-weight: 400
-    a
-      color: #fb2f0c
-.feature-images.feature-images--small .image
-  @media (min-width: 768px)
-    height: 500px
-
-.feature-images.feature-images--parallax
-  @media #{$medium-up}
-    height: 600px
-
-.feature-images .image
-  @media #{$medium-up}
-    height: 544px
-
-.feature-images .image
-  @media (min-width: 1200px)
-    height: 800px
-
-.feature-images .image--parallax
-  @media (min-width: 768px)
-    height: 105%
-
-@media (min-width: 1200px)
-  .feature-images .image--parallax
-    background-attachment: fixed
-
-@media (min-width: 1600px)
-  .feature-images .feature-image-content
-    width: 80%
