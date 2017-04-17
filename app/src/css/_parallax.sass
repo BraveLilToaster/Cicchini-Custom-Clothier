@@ -21,6 +21,7 @@
   color: $light-primary
   text-shadow: 2px 1px 1px $dark-primary
   @media #{$medium-up}
+    font-size: 1.2em
     padding: 0 7em
   @media #{$large-up}
     padding: 0 16em
@@ -36,7 +37,8 @@
 .feature
   margin-bottom: 3em
 .feature-text
-  margin-top: 0
+  @media #{$large-up}
+    margin-top: 0
 .feature-images
   position: relative
   background: #fff
