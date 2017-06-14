@@ -60,13 +60,23 @@
   margin: 0 auto
   max-width: 600px
   position: relative
+  @media #{$small-only}
+    padding-bottom: 3em
 .newsletter-input
   height: 48px
   font-size: 1em
   padding: 0 .8em
   display: inline-block
   +vendor-prefix(border-radius, 3px 0 0 3px)
-  +calc(width, '100% - 134px')
+  @media #{$small-only}
+    width: 100%
+    margin-bottom: 1em
+  @media #{$medium-up}
+  +calc(width, '100% - 107px')
+  &.bg-light
+    border: 1px inset rgba(0, 0, 0, 0.54)
+    @media #{$medium-up}
+      border-right: none
 .signup-button
   @extend .button
   height: 48px
@@ -81,6 +91,8 @@
   border-radius: 0px 3px 3px 0px
   letter-spacing: .1em
   +vendor-prefix(border-radius, 0 3px 3px 0)
+  @media #{$small-only}
+    width: 100%
   &:hover
     background-color: $color-primary-hover
 
