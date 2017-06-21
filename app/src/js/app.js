@@ -1,4 +1,3 @@
-(function () {
   var vm = this;
 
   // Toggle Nav Menu
@@ -49,12 +48,34 @@
   });
 
   // Modal
-  var modal = document.getElementById('modal');
+  var modal = (function() {
+   var modal = null;
+   var modalId = "modal";
+   var closeBtn = "modal-close";
+   var delay = 0;
 
-  var btn = document.getElementById("myBtn");
+    var open = function(d) {
+      modalId = d.getAttribute("data-modal-id");
+      modal = $('#' + modalId);
+      setTimeout(function(){
+          modal.show();
+        },
+        parseInt(d.getAttribute("data-modal-delay"))
+      );
+      closeBtn = modal.find('modal-close');
+    closeBtn.on("click", close);
+    modal.on("click", close);
+    }
+    var close = function() {
+      modal.hide();
+    }
+    return {
+      open: open,
+      close: close
+    };
+  })()
 
-  var span = document.getElementsByClassName("modal-close")[0];
-
+/*
   btn.onclick = function() {
     modal.style.display = "block";
   }
@@ -63,13 +84,7 @@
     modal.style.display = "none";
   }
 
-  window.onclick = function(event) {
-    if (event.target == modal) {
-      modal.style.display = "none";
-    }
-  }
-
+*/
   window.onload = function() {
     document.getElementById("menu-icon").addEventListener( 'click' , hideMenu );
   }
-})();

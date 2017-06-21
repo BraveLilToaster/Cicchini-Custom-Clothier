@@ -97,12 +97,12 @@
       <!--End mc_embed_signup-->
       <div class="content content-md">
         <!-- Trigger/Open The Modal -->
-        <button id="myBtn">Open Modal</button>
+        <button id="myBtn" data-modal-id="newsletter-modal" data-modal-delay="0" onclick="modal.open(this);">Open Modal</button>
         <!-- The Modal -->
-        <div id="modal" class="modal">
+        <div id="newsletter-modal" class="modal">
           <!-- Modal content -->
           <div class="modal-content fromTop">
-            <span class="modal-close">&times;</span>
+            <span id="modal-close" class="modal-close">&times;</span>
             <!-- Begin MailChimp Signup Form -->
             <div id="mc_embed_signup" class="halign-wrapper">
               <h2>Join Our Mailing List</h2>
