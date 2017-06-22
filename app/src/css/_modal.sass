@@ -16,9 +16,13 @@
   top: 0
   width: 100%
   height: 100%
+.modal-overlay
   overflow: auto
+  position: fixed
   background-color: rgb(0, 0, 0)
   background-color: rgba(0, 0, 0, 0.4)
+  width: 100%
+  height: 100%
 
 .modal-close
   font-size: 1.5em
@@ -32,7 +36,11 @@
   padding: 1em  1em 2em
   max-width: 600px
   position: relative
+  z-index: 1000
 
 .fromTop
   @include fromTop
 
+.snapcode
+  width: 100%
+  max-width: 200px
