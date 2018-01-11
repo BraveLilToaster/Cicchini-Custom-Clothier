@@ -8,7 +8,7 @@
 .parallax-window
   position: relative
   height: 400px
-  background: rgba(0,0,0,0.3)
+  background: rgba(0,0,0,0.4)
   @media #{$medium-up}
     height: 600px
 .parallax-slider
@@ -20,13 +20,12 @@
     height: 600px
 .parallax-content
   color: $light-primary
-  h1, h2, h3, h4, h5, h6
+  h1, h2, h3, h4, h5, h6, p
     text-shadow: 2px 1px 1px $dark-primary
   @media #{$medium-up}
     font-size: 1.2em
-    padding: 0 7em
-  @media #{$large-up}
-    padding: 0 16em
+    max-width: 1280px
+    padding: 0 2em
 .parallax-title
   margin-top: 0
   &.header
