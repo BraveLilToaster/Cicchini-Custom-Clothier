@@ -31,8 +31,6 @@ $(document).ready(function(){
 $('.parallax-window').parallax({
   naturalWidth: 600,
   naturalHeight: 400,
-  iosFix: true,
-  androidFix: true
 });
 
 // Smooth Scrolling

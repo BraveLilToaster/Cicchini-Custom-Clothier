@@ -1,5 +1,5 @@
 /*!
- * parallax.js v1.4.2 (http://pixelcog.github.io/parallax.js/)
+ * parallax.js v1.5.0 (http://pixelcog.github.io/parallax.js/)
  * @copyright 2016 PixelCog, Inc.
  * @license MIT (https://github.com/pixelcog/parallax.js/blob/master/LICENSE)
  */
@@ -14,8 +14,7 @@
     var vendors = ['ms', 'moz', 'webkit', 'o'];
     for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
       window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
-      window.cancelAnimationFrame = window[vendors[x]+'CancelAnimationFrame']
-        || window[vendors[x]+'CancelRequestAnimationFrame'];
+      window.cancelAnimationFrame = window[vendors[x]+'CancelAnimationFrame'] || window[vendors[x]+'CancelRequestAnimationFrame'];
     }
 
     if (!window.requestAnimationFrame)
@@ -34,6 +33,31 @@
       };
   }());
 
+  // Detect whether passive event listener is supported
+
+  var supportsPassive = false;
+  try {
+    var opts = Object.defineProperty({}, 'passive', {
+      get: function() {
+        supportsPassive = true;
+      }
+    });
+    window.addEventListener('test', null, opts);
+  } catch (e) {}
+
+  function passiveOn(el, name, listener) {
+    if (supportsPassive) {
+      el.addEventListener(name, listener, {
+        passive: true
+      })
+    } else {
+      el.addEventListener(name, listener)
+    }
+  }
+
+  function passiveOff(el, name, listener) {
+    el.removeEventListenr(name, listener)
+  }
 
   // Parallax Constructor
 
@@ -65,8 +89,8 @@
       positions = [positions[1], positions[0]];
     }
 
-    if (this.positionX != undefined) positions[0] = this.positionX.toLowerCase();
-    if (this.positionY != undefined) positions[1] = this.positionY.toLowerCase();
+    if (this.positionX !== undefined) positions[0] = this.positionX.toLowerCase();
+    if (this.positionY !== undefined) positions[1] = this.positionY.toLowerCase();
 
     self.positionX = positions[0];
     self.positionY = positions[1];
@@ -92,28 +116,32 @@
       this.positionY + (isNaN(this.positionY)? '' : 'px');
 
     if (navigator.userAgent.match(/(iPod|iPhone|iPad)/)) {
-      if (this.imageSrc && this.iosFix && !this.$element.is('img')) {
-        this.$element.css({
-          backgroundImage: 'url(' + this.imageSrc + ')',
-          backgroundSize: 'cover',
-          backgroundPosition: this.position
-        });
+      if (this.iosDisabled) {
+        if (this.imageSrc && this.iosFix && !this.$element.is('img')) {
+          this.$element.css({
+            backgroundImage: 'url("' + this.imageSrc + '")',
+            backgroundSize: 'cover',
+            backgroundPosition: this.position
+          });
+        }
+        return this;
       }
-      return this;
     }
 
     if (navigator.userAgent.match(/(Android)/)) {
-      if (this.imageSrc && this.androidFix && !this.$element.is('img')) {
-        this.$element.css({
-          backgroundImage: 'url(' + this.imageSrc + ')',
-          backgroundSize: 'cover',
-          backgroundPosition: this.position
-        });
+      if (this.androidDisabled) {
+        if (this.imageSrc && this.androidFix && !this.$element.is('img')) {
+          this.$element.css({
+            backgroundImage: 'url("' + this.imageSrc + '")',
+            backgroundSize: 'cover',
+            backgroundPosition: this.position
+          });
+        }
+        return this;
       }
-      return this;
     }
 
-    this.$mirror = $('<div />').prependTo('body');
+    this.$mirror = $('<div />').prependTo(this.mirrorContainer);
 
     var slider = this.$element.find('>.parallax-slider');
     var sliderExisted = false;
@@ -154,7 +182,7 @@
       this.$slider.trigger('load');
     }
 
-  };
+  }
 
 
   // Parallax Instance Methods
@@ -164,9 +192,12 @@
     bleed:    0,
     zIndex:   -100,
     iosFix:   true,
+    iosDisabled: true,
     androidFix: true,
+    androidDisabled: true,
     position: 'center',
     overScrollFix: false,
+    mirrorContainer: 'body',
 
     refresh: function() {
       this.boxWidth        = this.$element.outerWidth();
@@ -181,13 +212,14 @@
       var minOffset = Math.max(this.boxOffsetTop + this.boxHeight - winHeight, 0);
       var imageHeightMin = this.boxHeight + (maxOffset - minOffset) * (1 - this.speed) | 0;
       var imageOffsetMin = (this.boxOffsetTop - maxOffset) * (1 - this.speed) | 0;
+      var margin;
 
       if (imageHeightMin * this.aspectRatio >= this.boxWidth) {
         this.imageWidth    = imageHeightMin * this.aspectRatio | 0;
         this.imageHeight   = imageHeightMin;
         this.offsetBaseTop = imageOffsetMin;
 
-        var margin = this.imageWidth - this.boxWidth;
+        margin = this.imageWidth - this.boxWidth;
 
         if (this.positionX == 'left') {
           this.offsetLeft = 0;
@@ -203,7 +235,7 @@
         this.imageHeight   = this.boxWidth / this.aspectRatio | 0;
         this.offsetLeft    = 0;
 
-        var margin = this.imageHeight - imageHeightMin;
+        margin = this.imageHeight - imageHeightMin;
 
         if (this.positionY == 'top') {
           this.offsetBaseTop = imageOffsetMin;
@@ -233,19 +265,15 @@
       }
 
       this.$mirror.css({
-        transform: 'translate3d(0px, 0px, 0px)',
+        transform: 'translate3d('+this.mirrorLeft+'px, '+(this.mirrorTop - overScroll)+'px, 0px)',
         visibility: this.visibility,
-        top: this.mirrorTop - overScroll,
-        left: this.mirrorLeft,
         height: this.boxHeight,
         width: this.boxWidth
       });
 
       this.$slider.css({
-        transform: 'translate3d(0px, 0px, 0px)',
+        transform: 'translate3d('+this.offsetLeft+'px, '+this.offsetTop+'px, 0px)',
         position: 'absolute',
-        top: this.offsetTop,
-        left: this.offsetLeft,
         height: this.imageHeight,
         width: this.imageWidth,
         maxWidth: 'none'
@@ -271,6 +299,8 @@
     setup: function() {
       if (this.isReady) return;
 
+      var self = this;
+
       var $doc = $(document), $win = $(window);
 
       var loadDimensions = function() {
@@ -289,20 +319,39 @@
         Parallax.overScroll = Math.max(winScrollTop - scrollTopMax, Math.min(winScrollTop, 0));
       };
 
+      var scrollListener = this.scrollListener = function() {
+        loadScrollPosition();
+        Parallax.requestRender();
+      };
+
       $win.on('resize.px.parallax load.px.parallax', function() {
           loadDimensions();
+          self.refresh();
           Parallax.isFresh = false;
           Parallax.requestRender();
         })
-        .on('scroll.px.parallax load.px.parallax', function() {
-          loadScrollPosition();
-          Parallax.requestRender();
-        });
+        .on('scroll.px.parallax load.px.parallax', scrollListener);
+
+      passiveOn(window, 'touchmove', scrollListener);
 
       loadDimensions();
       loadScrollPosition();
 
       this.isReady = true;
+
+      var lastPosition = -1;
+
+      function frameLoop() {
+        if (lastPosition == window.pageYOffset) {   // Avoid overcalculations
+          window.requestAnimationFrame(frameLoop);
+          return false;
+        } else lastPosition = window.pageYOffset;
+
+        self.render();
+        window.requestAnimationFrame(frameLoop);
+      }
+
+      frameLoop();
     },
 
     configure: function(options) {
@@ -314,25 +363,19 @@
     },
 
     refresh: function() {
-      $.each(this.sliders, function(){ this.refresh() });
+      $.each(this.sliders, function(){ this.refresh(); });
       this.isFresh = true;
     },
 
     render: function() {
       this.isFresh || this.refresh();
-      $.each(this.sliders, function(){ this.render() });
+      $.each(this.sliders, function(){ this.render(); });
     },
 
     requestRender: function() {
       var self = this;
-
-      if (!this.isBusy) {
-        this.isBusy = true;
-        window.requestAnimationFrame(function() {
-          self.render();
-          self.isBusy = false;
-        });
-      }
+      self.render();
+      self.isBusy = false;
     },
     destroy: function(el){
       var i,
@@ -346,6 +389,7 @@
       $(el).data('px.parallax', false);
       if(this.sliders.length === 0){
         $(window).off('scroll.px.parallax resize.px.parallax load.px.parallax');
+        passiveOff(window, 'touchmove', this.scrollListener);
         this.isReady = false;
         Parallax.isSetup = false;
       }
@@ -373,13 +417,13 @@
       }
       if (typeof option == 'string') {
         if(option == 'destroy'){
-            Parallax['destroy'](this);
+            Parallax.destroy(this);
         }else{
           Parallax[option]();
         }
       }
-    })
-  };
+    });
+  }
 
   var old = $.fn.parallax;
 
@@ -397,7 +441,7 @@
 
   // Parallax Data-API
 
-  $(document).on('ready.px.parallax.data-api', function () {
+  $( function () {
     $('[data-parallax="scroll"]').parallax();
   });
 
