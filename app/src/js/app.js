@@ -61,57 +61,71 @@ var msnry = (function() {
 
 // lightGallery
 loadLightGallery = function(){
-  lightGallery(document.getElementById('test-gallery'), {
+  lightGallery(document.getElementById('lookbook-gallery'), {
     thumbnail:true,
     animateThumb: false,
     showThumbByDefault: false,
     selector: '.gallery-grid-item',
+    mode: 'lg-fade',
+    cssEasing : 'cubic-bezier(0.25, 0, 0.25, 1)',
   });
 }
 
-loadGallery = function(id, category){
-  return new Promise(function(res,rej){
+var gallery = (function(){
+  var galleryImages = {
+    suits: [
+      'Cicchini Custom Clothier Photos Web Size-41.jpg',
+      'Cicchini Custom Clothier Photos Web Size-80.jpg',
+      'Cicchini Custom Clothier Photos Web Size-84.jpg',
+      'Cicchini Custom Clothier Photos Web Size-25.jpg',
+      'Cicchini Custom Clothier Photos Web Size-92.jpg',
+      'Cicchini Custom Clothier Photos Web Size-105.jpg',
+      'Cicchini Custom Clothier Photos Web Size-115.jpg',
+      'Cicchini Custom Clothier Photos Web Size-125.jpg',
+    ],
+    shirts: [
+      'Cicchini Custom Clothier Photos Web Size-92.jpg',
+      'Cicchini Custom Clothier Photos Web Size-105.jpg',
+      'Cicchini Custom Clothier Photos Web Size-115.jpg',
+      'Cicchini Custom Clothier Photos Web Size-125.jpg',
+    ],
+  }
+  return {
+    build: function(id, category){
       var galleryDom = document.getElementById(id);
-      var galleryImages = {
-        suits: [
-          'Cicchini Custom Clothier Photos Web Size-41.jpg',
-          'Cicchini Custom Clothier Photos Web Size-80.jpg',
-          'Cicchini Custom Clothier Photos Web Size-84.jpg',
-          'Cicchini Custom Clothier Photos Web Size-25.jpg',
-          'Cicchini Custom Clothier Photos Web Size-92.jpg',
-          'Cicchini Custom Clothier Photos Web Size-105.jpg',
-          'Cicchini Custom Clothier Photos Web Size-115.jpg',
-          'Cicchini Custom Clothier Photos Web Size-125.jpg',
-        ],
-        shirts: [
-          'Cicchini Custom Clothier Photos Web Size-92.jpg',
-          'Cicchini Custom Clothier Photos Web Size-105.jpg',
-          'Cicchini Custom Clothier Photos Web Size-115.jpg',
-          'Cicchini Custom Clothier Photos Web Size-125.jpg',
-        ],
-      }
-    msnry.append(
-      galleryImages.suits.map(function(imageSrc){
-        var galleryImageContainer = document.createElement('div')
-        galleryImageContainer.setAttribute('class', 'gallery-grid-item');
-        galleryImageContainer.setAttribute('data-src', 'img/'+imageSrc);
-        var galleryImage = document.createElement('img')
-        galleryImage.setAttribute('src', 'img/'+imageSrc);
-        galleryImageContainer.appendChild(galleryImage)
-        galleryDom.appendChild(galleryImageContainer)
-        return galleryImageContainer
-      })
-    )
-  })
-}
+      msnry.append(
+        galleryImages.suits.map(function(imageSrc){
+          var galleryImageContainer = document.createElement('div')
+          galleryImageContainer.setAttribute('class', 'gallery-grid-item');
+          galleryImageContainer.setAttribute('data-src', 'img/'+imageSrc);
+          var galleryImage = document.createElement('img')
+          galleryImage.setAttribute('src', 'img/'+imageSrc);
+          galleryImageContainer.appendChild(galleryImage)
+          galleryDom.appendChild(galleryImageContainer)
+          return galleryImageContainer
+        })
+      )
+    }
+  }
+})()
 
 function initGallery(galleryID, galleryCategory){
   msnry.load(galleryID, 'gallery-grid', 'gallery-grid-item')
-  loadGallery(galleryID, galleryCategory)
+  gallery.build(galleryID, galleryCategory)
   loadLightGallery()
 }
 
-initGallery('test-gallery', 'suits')
+var galleries = [
+  {
+    'name': 'lookbook',
+    'id': 'lookbook-gallery',
+    'defaultCategory': 'suits',
+    'gridClass': 'gallery-grid',
+    'gridItemClass': 'gallery-grid-item',
+  },
+]
+
+initGallery('lookbook-gallery', 'suits')
 
 // Parallax
 $('.parallax-window').parallax({
