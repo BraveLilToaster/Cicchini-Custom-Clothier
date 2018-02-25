@@ -1,10 +1,13 @@
 // Masonry
 .gallery-grid-item
-  width: calc(50% - 1rem)
+  width: 100%
   overflow: hidden
-  margin: 0 .5rem 1rem
+  margin: 0 0 2rem
   &:hover
     cursor: pointer
+  @media #{$medium-up}
+    width: calc(50% - 1rem)
+    margin: 0 .5rem 1rem
   @media #{$large-up}
     width: calc(33.33% - 2rem)
   & > img
