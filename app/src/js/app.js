@@ -1,5 +1,38 @@
 (function(){
 
+var galleries = [
+  {
+    'name': 'lookbook',
+    'id': 'lookbook-gallery',
+    'defaultCategory': 'suits',
+    'gridClass': 'gallery-grid',
+    'gridItemClass': 'gallery-grid-item',
+    'images': {
+      'all': [],
+      'formalWear': [
+        'Cicchini Custom Clothier Photos Web Size-115.jpg',
+        'Cicchini Custom Clothier Photos Web Size-125.jpg',
+      ],
+      'suits': [
+        'Cicchini Custom Clothier Photos Web Size-41.jpg',
+        'Cicchini Custom Clothier Photos Web Size-80.jpg',
+        'Cicchini Custom Clothier Photos Web Size-84.jpg',
+        'Cicchini Custom Clothier Photos Web Size-25.jpg',
+        'Cicchini Custom Clothier Photos Web Size-92.jpg',
+        'Cicchini Custom Clothier Photos Web Size-105.jpg',
+        'Cicchini Custom Clothier Photos Web Size-115.jpg',
+        'Cicchini Custom Clothier Photos Web Size-125.jpg',
+      ],
+      'shirts': [
+        'Cicchini Custom Clothier Photos Web Size-92.jpg',
+        'Cicchini Custom Clothier Photos Web Size-105.jpg',
+        'Cicchini Custom Clothier Photos Web Size-115.jpg',
+        'Cicchini Custom Clothier Photos Web Size-125.jpg',
+      ],
+    }
+  },
+]
+
 // Toggle Nav Menu
 var hideMenu = function() {
   if ( document.getElementById("navigation").className.match(/(?:^|\s)hide-menu(?!\S)/) ) {
@@ -52,6 +85,23 @@ var msnry = (function() {
       masonry.appended(elements)
       msnry.layout()
     },
+    build: function(id, category, images){
+      msnry.append(
+        images[category].map(function(imageSrc){
+          var galleryImageContainer = document.createElement('div')
+          galleryImageContainer.setAttribute('class', 'gallery-grid-item');
+          galleryImageContainer.setAttribute('data-src', 'img/'+imageSrc);
+          var galleryImage = document.createElement('img')
+          galleryImage.setAttribute('src', 'img/'+imageSrc);
+          galleryImageContainer.appendChild(galleryImage)
+          galleryContainer.appendChild(galleryImageContainer)
+          return galleryImageContainer
+        })
+      )
+    },
+    remove: function(elements){
+      masonry.remove(elements)
+    },
     removeAll: function(elements){
       elements = masonry.getItemElements()
       masonry.remove(elements)
@@ -62,7 +112,7 @@ var msnry = (function() {
 // lightGallery
 loadLightGallery = function(){
   lightGallery(document.getElementById('lookbook-gallery'), {
-    thumbnail:true,
+    thumbnail: true,
     animateThumb: false,
     showThumbByDefault: false,
     selector: '.gallery-grid-item',
@@ -71,61 +121,33 @@ loadLightGallery = function(){
   });
 }
 
-var gallery = (function(){
-  var galleryImages = {
-    suits: [
-      'Cicchini Custom Clothier Photos Web Size-41.jpg',
-      'Cicchini Custom Clothier Photos Web Size-80.jpg',
-      'Cicchini Custom Clothier Photos Web Size-84.jpg',
-      'Cicchini Custom Clothier Photos Web Size-25.jpg',
-      'Cicchini Custom Clothier Photos Web Size-92.jpg',
-      'Cicchini Custom Clothier Photos Web Size-105.jpg',
-      'Cicchini Custom Clothier Photos Web Size-115.jpg',
-      'Cicchini Custom Clothier Photos Web Size-125.jpg',
-    ],
-    shirts: [
-      'Cicchini Custom Clothier Photos Web Size-92.jpg',
-      'Cicchini Custom Clothier Photos Web Size-105.jpg',
-      'Cicchini Custom Clothier Photos Web Size-115.jpg',
-      'Cicchini Custom Clothier Photos Web Size-125.jpg',
-    ],
-  }
-  return {
-    build: function(id, category){
-      var galleryDom = document.getElementById(id);
-      msnry.append(
-        galleryImages.suits.map(function(imageSrc){
-          var galleryImageContainer = document.createElement('div')
-          galleryImageContainer.setAttribute('class', 'gallery-grid-item');
-          galleryImageContainer.setAttribute('data-src', 'img/'+imageSrc);
-          var galleryImage = document.createElement('img')
-          galleryImage.setAttribute('src', 'img/'+imageSrc);
-          galleryImageContainer.appendChild(galleryImage)
-          galleryDom.appendChild(galleryImageContainer)
-          return galleryImageContainer
-        })
-      )
-    }
-  }
-})()
 
-function initGallery(galleryID, galleryCategory){
-  msnry.load(galleryID, 'gallery-grid', 'gallery-grid-item')
-  gallery.build(galleryID, galleryCategory)
+function initGallery(galleries, galleryName){
+  var gallery = galleries.find(function(gallery){
+    return gallery.name === galleryName
+  })
+  msnry.load(gallery.id, gallery.gridClass, gallery.gridItemClass)
+  msnry.build(gallery.id, gallery.defaultCategory, gallery.images)
   loadLightGallery()
+  document.getElementById("filterAll").addEventListener("click", function(){
+    filterGallery(gallery.id, "all", gallery.images)
+  });
+  document.getElementById("filterShirts").addEventListener("click", function(){
+    filterGallery(gallery.id, "shirts", gallery.images)
+  });
+  document.getElementById("filterSuits").addEventListener("click", function(){
+    filterGallery(gallery.id, "suits", gallery.images)
+  });
+  document.getElementById("filterFormalWear").addEventListener("click", function(){
+    filterGallery(gallery.id, "formalWear", gallery.images)
+  });
 }
 
-var galleries = [
-  {
-    'name': 'lookbook',
-    'id': 'lookbook-gallery',
-    'defaultCategory': 'suits',
-    'gridClass': 'gallery-grid',
-    'gridItemClass': 'gallery-grid-item',
-  },
-]
-
-initGallery('lookbook-gallery', 'suits')
+function filterGallery(galleryID, galleryCategory, images){
+  msnry.removeAll()
+  msnry.build(galleryID, galleryCategory, images)
+  loadLightGallery()
+}
 
 // Parallax
 $('.parallax-window').parallax({
@@ -145,11 +167,11 @@ smoothScroll.init({
 
 // Modal
 var modal = (function() {
- var modal = null;
- var modalId = "modal";
- var modalOverlay = "modal-overlay";
- var closeBtn = "modal-close";
- var delay = 0;
+  var modal = null;
+  var modalId = "modal";
+  var modalOverlay = "modal-overlay";
+  var closeBtn = "modal-close";
+  var delay = 0;
 
   var open = function(d, delay) {
     console.log(typeof d);
@@ -165,8 +187,8 @@ var modal = (function() {
     }
     modal = $('#' + modalId);
     setTimeout(function(){
-        modal.show();
-      },
+      modal.show();
+    },
       parseInt(delay)
     );
     modal.prepend('<div class="modal-overlay"></div>');
@@ -188,4 +210,6 @@ var modal = (function() {
 window.onload = function() {
   document.getElementById("menu-icon").addEventListener( 'click' , hideMenu );
 }
+initGallery(galleries, "lookbook")
+
 })();
