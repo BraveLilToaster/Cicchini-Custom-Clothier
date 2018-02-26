@@ -4,7 +4,7 @@ var galleries = [
   {
     'name': 'lookbook',
     'id': 'lookbook-gallery',
-    'defaultCategory': 'suits',
+    'defaultCategory': 'all',
     'gridClass': 'gallery-grid',
     'gridItemClass': 'gallery-grid-item',
     'images': {
@@ -18,16 +18,10 @@ var galleries = [
         'Cicchini Custom Clothier Photos Web Size-80.jpg',
         'Cicchini Custom Clothier Photos Web Size-84.jpg',
         'Cicchini Custom Clothier Photos Web Size-25.jpg',
-        'Cicchini Custom Clothier Photos Web Size-92.jpg',
-        'Cicchini Custom Clothier Photos Web Size-105.jpg',
-        'Cicchini Custom Clothier Photos Web Size-115.jpg',
-        'Cicchini Custom Clothier Photos Web Size-125.jpg',
       ],
       'shirts': [
         'Cicchini Custom Clothier Photos Web Size-92.jpg',
         'Cicchini Custom Clothier Photos Web Size-105.jpg',
-        'Cicchini Custom Clothier Photos Web Size-115.jpg',
-        'Cicchini Custom Clothier Photos Web Size-125.jpg',
       ],
     }
   },
@@ -87,7 +81,7 @@ var msnry = (function() {
     },
     build: function(id, category, images){
       msnry.append(
-        images[category].map(function(imageSrc){
+        images.map(function(imageSrc){
           var galleryImageContainer = document.createElement('div')
           galleryImageContainer.setAttribute('class', 'gallery-grid-item');
           galleryImageContainer.setAttribute('data-src', 'img/'+imageSrc);
@@ -110,44 +104,65 @@ var msnry = (function() {
 })();
 
 // lightGallery
-loadLightGallery = function(){
-  lightGallery(document.getElementById('lookbook-gallery'), {
-    thumbnail: true,
-    animateThumb: false,
-    showThumbByDefault: false,
-    selector: '.gallery-grid-item',
-    mode: 'lg-fade',
-    cssEasing : 'cubic-bezier(0.25, 0, 0.25, 1)',
-  });
-}
+var lGallery = (function() {
+  var galleryID
+  return {
+    load: function(gID, gallerySelector){
+      galleryID = document.getElementById(gID)
+      lightGallery(document.getElementById(gID), {
+        thumbnail: true,
+        animateThumb: false,
+        showThumbByDefault: false,
+        selector: '.'+gallerySelector,
+        mode: 'lg-fade',
+        cssEasing : 'cubic-bezier(0.25, 0, 0.25, 1)',
+      })
+    },
+    destroy: function() {
+      window.lgData[galleryID.getAttribute('lg-uid')].destroy(true)
+    },
+    reload: function(gID, gallerySelector) {
+      lGallery.destroy()
+      lGallery.load(gID, gallerySelector)
+    },
+  }
+})();
 
+var Gallery = (function(){
+  var gallery
+  return {
+    init: function(galleries, galleryName){
+      gallery = galleries.find(function(gallery){
+        return gallery.name === galleryName
+      })
+      gallery.images.all = Object.values(gallery.images)
+        .reduce(function(a, b){
+          return a.concat(b)
+        })
+      msnry.load(gallery.id, gallery.gridClass, gallery.gridItemClass)
+      msnry.build(gallery.id, gallery.defaultCategory, gallery.images[gallery.defaultCategory])
+      lGallery.load(gallery.id, gallery.gridItemClass)
+      document.getElementById("filterAll").addEventListener("click", function(){
+        Gallery.filter(gallery.id, "all", gallery.images)
+      });
+      document.getElementById("filterShirts").addEventListener("click", function(){
+        Gallery.filter(gallery.id, "shirts", gallery.images)
+      });
+      document.getElementById("filterSuits").addEventListener("click", function(){
+        Gallery.filter(gallery.id, "suits", gallery.images)
+      });
+      document.getElementById("filterFormalWear").addEventListener("click", function(){
+        Gallery.filter(gallery.id, "formalWear", gallery.images)
+      });
+    },
+    filter: function(galleryID, galleryCategory, images){
+      msnry.removeAll()
+      msnry.build(galleryID, galleryCategory, images[galleryCategory])
+      lGallery.reload(galleryID, gallery.gridItemClass)
+    },
+  }
 
-function initGallery(galleries, galleryName){
-  var gallery = galleries.find(function(gallery){
-    return gallery.name === galleryName
-  })
-  msnry.load(gallery.id, gallery.gridClass, gallery.gridItemClass)
-  msnry.build(gallery.id, gallery.defaultCategory, gallery.images)
-  loadLightGallery()
-  document.getElementById("filterAll").addEventListener("click", function(){
-    filterGallery(gallery.id, "all", gallery.images)
-  });
-  document.getElementById("filterShirts").addEventListener("click", function(){
-    filterGallery(gallery.id, "shirts", gallery.images)
-  });
-  document.getElementById("filterSuits").addEventListener("click", function(){
-    filterGallery(gallery.id, "suits", gallery.images)
-  });
-  document.getElementById("filterFormalWear").addEventListener("click", function(){
-    filterGallery(gallery.id, "formalWear", gallery.images)
-  });
-}
-
-function filterGallery(galleryID, galleryCategory, images){
-  msnry.removeAll()
-  msnry.build(galleryID, galleryCategory, images)
-  loadLightGallery()
-}
+})();
 
 // Parallax
 $('.parallax-window').parallax({
@@ -210,6 +225,6 @@ var modal = (function() {
 window.onload = function() {
   document.getElementById("menu-icon").addEventListener( 'click' , hideMenu );
 }
-initGallery(galleries, "lookbook")
+Gallery.init(galleries, "lookbook")
 
 })();
