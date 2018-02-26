@@ -123,18 +123,20 @@ var lGallery = (function() {
     },
     reload: function(gID, gallerySelector) {
       lGallery.destroy()
-      lGallery.load(gID, gallerySelector)
+      setTimeout(function(){lGallery.load(gID, gallerySelector)},1000)
     },
   }
 })();
 
 var Gallery = (function(){
   var gallery
+  var category
   return {
     init: function(galleries, galleryName){
       gallery = galleries.find(function(gallery){
         return gallery.name === galleryName
       })
+      category = gallery.defaultCategory
       gallery.images.all = Object.values(gallery.images)
         .reduce(function(a, b){
           return a.concat(b)
@@ -156,9 +158,12 @@ var Gallery = (function(){
       });
     },
     filter: function(galleryID, galleryCategory, images){
-      msnry.removeAll()
-      msnry.build(galleryID, galleryCategory, images[galleryCategory])
-      lGallery.reload(galleryID, gallery.gridItemClass)
+      if(category !== galleryCategory){
+        category = galleryCategory
+        msnry.removeAll()
+        msnry.build(galleryID, galleryCategory, images[galleryCategory])
+        lGallery.reload(galleryID, gallery.gridItemClass)
+      }
     },
   }
 
