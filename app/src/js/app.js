@@ -1,5 +1,3 @@
-(function(){
-
 var galleries = [
   {
     'name': 'lookbook',
@@ -194,9 +192,7 @@ var modal = (function() {
   var delay = 0;
 
   var open = function(d, delay) {
-    console.log(typeof d);
     if((typeof d) === "string"){
-      console.log(d);
       modalId = d;
       delay = delay;
     }
@@ -230,6 +226,4 @@ var modal = (function() {
 window.onload = function() {
   document.getElementById("menu-icon").addEventListener( 'click' , hideMenu );
 }
-Gallery.init(galleries, "lookbook")
 
-})();
