@@ -1,3 +1,12 @@
+
+var loadImagesFromSrc = function(imgSrc, imgNum, ext){
+  return Array.apply(null, Array(imgNum))
+    .map(function(val, idx){
+      return imgSrc + (idx+1) + ext
+    })
+    .reverse()
+}
+
 var galleries = [
   {
     'name': 'lookbook',
@@ -7,20 +16,9 @@ var galleries = [
     'gridItemClass': 'gallery-grid-item',
     'images': {
       'all': [],
-      'formalWear': [
-        'Cicchini Custom Clothier Photos Web Size-115.jpg',
-        'Cicchini Custom Clothier Photos Web Size-125.jpg',
-      ],
-      'suits': [
-        'Cicchini Custom Clothier Photos Web Size-41.jpg',
-        'Cicchini Custom Clothier Photos Web Size-80.jpg',
-        'Cicchini Custom Clothier Photos Web Size-84.jpg',
-        'Cicchini Custom Clothier Photos Web Size-25.jpg',
-      ],
-      'shirts': [
-        'Cicchini Custom Clothier Photos Web Size-92.jpg',
-        'Cicchini Custom Clothier Photos Web Size-105.jpg',
-      ],
+      'formalWear': loadImagesFromSrc('img/Cicchini Custom Clothier - Formal Wear - ', 13, '.jpg'),
+      'suits': loadImagesFromSrc('img/Cicchini Custom Clothier - Custom Suits - ', 52, '.jpg'),
+      'shirts': loadImagesFromSrc('img/Cicchini Custom Clothier - Shirts - ', 34, '-min.jpg'),
     }
   },
 ]
@@ -82,9 +80,9 @@ var msnry = (function() {
         images.map(function(imageSrc){
           var galleryImageContainer = document.createElement('div')
           galleryImageContainer.setAttribute('class', 'gallery-grid-item');
-          galleryImageContainer.setAttribute('data-src', 'img/'+imageSrc);
+          galleryImageContainer.setAttribute('data-src', imageSrc);
           var galleryImage = document.createElement('img')
-          galleryImage.setAttribute('src', 'img/'+imageSrc);
+          galleryImage.setAttribute('src', imageSrc);
           galleryImageContainer.appendChild(galleryImage)
           galleryContainer.appendChild(galleryImageContainer)
           return galleryImageContainer
@@ -174,13 +172,11 @@ $('.parallax-window').parallax({
 });
 
 // Smooth Scrolling
-smoothScroll.init({
-  selector: '[data-scroll]', // Selector for links (must be a class, ID, data attribute, or element tag)
-  selectorHeader: null, // Selector for fixed headers (must be a valid CSS selector) [optional]
-  speed: 500, // Integer. How fast to complete the scroll in milliseconds
-  easing: 'easeInOutCubic', // Easing pattern to use
-  offset: 80, // Integer. How far to offset the scrolling anchor location in pixels
-  callback: function ( anchor, toggle ) {} // Function to run after scrolling
+var scroll = new SmoothScroll('[data-scroll]',{
+  header: null,
+  speed: 800,
+  easing: 'easeInOutCubic',
+  offset: 80,
 });
 
 // Modal

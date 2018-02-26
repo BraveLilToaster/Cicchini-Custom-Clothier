@@ -37,11 +37,11 @@ gulp.task('bundle:css', function() {
 gulp.task('bundle:js', function() {
   return gulp.src([
     'node_modules/jquery/dist/jquery.min.js',
+    'node_modules/smooth-scroll/dist/js/smooth-scroll.polyfills.min.js ',
     'node_modules/lightgallery.js/dist/js/lightgallery.min.js',
     'node_modules/slick-carousel/slick/slick.min.js',
     'node_modules/masonry-layout/dist/masonry.pkgd.min.js',
     'node_modules/imagesloaded/imagesloaded.pkgd.min.js',
-    'node_modules/smooth-scroll/dist/js/smooth-scroll.polyfills.min.js ',
   ])
     .pipe(concat('bundle.js'))
     .pipe(gulp.dest(buildDir + '/js/'));
