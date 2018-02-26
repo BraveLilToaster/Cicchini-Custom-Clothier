@@ -27,6 +27,6 @@
     "lightgallery.js": "^1.0.2",
     "masonry-layout": "^4.2.1",
     "slick-carousel": "^1.8.1",
-    "smooth-scroll": "github:cferdinandi/smooth-scroll"
+    "smooth-scroll": "^12.1.5"
   }
 }
