@@ -1,0 +1,29 @@
+// Masonry
+.gallery-grid-item
+  width: 100%
+  overflow: hidden
+  margin: 0 0 2rem
+  &:hover
+    cursor: pointer
+  @media #{$medium-up}
+    width: calc(50% - 1rem)
+    margin: 0 .5rem 1rem
+  @media #{$large-up}
+    width: calc(33.33% - 1rem)
+  & > img
+    width: 100%
+    display: block
+    -webkit-transition: all 0.2s linear
+    -moz-transition: all 0.2s linear
+    -o-transition: all 0.2s linear
+    -ms-transition: all 0.2s linear
+    transition: all 0.2s linear
+    &:hover
+      -webkit-transform: scale(1.1,1.1)
+      -moz-transform: scale(1.1,1.1)
+      -o-transform: scale(1.1,1.1)
+      -ms-transform: scale(1.1,1.1)
+      transform: scale(1.1,1.1)
+
+// lightGallery
+
