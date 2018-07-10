@@ -7,6 +7,11 @@ var loadImagesFromSrc = function(imgSrc, imgNum, ext){
     .reverse()
 }
 
+var imgUrlBase = 'https://res.cloudinary.com/cicchini/image/upload/'
+var imgTransform = {
+  max_size_720: 'w_720,h_720,c_fit/',
+}
+
 var galleries = [
   {
     'name': 'lookbook',
@@ -16,8 +21,8 @@ var galleries = [
     'gridItemClass': 'gallery-grid-item',
     'images': {
       'all': [],
-      'formalWear': loadImagesFromSrc('img/Cicchini Custom Clothier - Formal Wear - ', 13, '.jpg'),
-      'suits': loadImagesFromSrc('img/Cicchini Custom Clothier - Custom Suits - ', 52, '.jpg'),
+      'formalWear': loadImagesFromSrc(imgUrlBase+imgTransform.max_size_720+'v1530139933/'+'Look%20Book/Formal%20Wear/Formal%20Wear%20-%20', 20, '.jpg'),
+      'suits': loadImagesFromSrc('img/Cicchini Custom Clothier - Custom Suits - ', 97, '-min.jpg'),
       'shirts': loadImagesFromSrc('img/Cicchini Custom Clothier - Shirts - ', 34, '-min.jpg'),
     }
   },
