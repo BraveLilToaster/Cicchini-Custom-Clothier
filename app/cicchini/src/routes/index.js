@@ -3,15 +3,34 @@ import styled from 'styled-components'
 import Hero from '../styles/Hero'
 import Container from '../styles/Container'
 import Section from '../styles/Section'
+import Slider from '../components/Slider'
 
 const index = props => {
   return (
     <Container>
-      <Hero background={'blue'}>
-        <Section>
-          <p>Home</p>
-        </Section>
-      </Hero>
+      <Slider
+        autoplay
+        autoplaySpeed={3500}
+        dots
+        slidesToShow={1}
+        slidesToScroll={1}
+      >
+        <HeroSlide background={'blue'}>
+          <Section>
+            <p>Home</p>
+          </Section>
+        </HeroSlide>
+        <HeroSlide background={'red'}>
+          <Section>
+            <p>Home</p>
+          </Section>
+        </HeroSlide>
+        <HeroSlide background={'green'}>
+          <Section>
+            <p>Home</p>
+          </Section>
+        </HeroSlide>
+      </Slider>
       <Section>
         <h1>
           The Cicchini Story
@@ -29,5 +48,9 @@ const index = props => {
     </Container>
   )
 }
+
+const HeroSlide = Hero.extend`
+  outline: none;
+`
 
 export default index
