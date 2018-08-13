@@ -28,7 +28,7 @@ const Header = props => {
 }
 
 const HeaderContainer = styled.div`
-  background: rgb(38, 38, 38);
+  background: ${props => props.theme.primary.main};
   height: 4rem;
   position: fixed;
   top: 0;

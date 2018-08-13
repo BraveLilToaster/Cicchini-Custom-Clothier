@@ -1,4 +1,7 @@
 export const theme = {
+  primary: {
+    main: 'rgba(0,0,0,1)',
+  },
   text: {
     dark: {
       primary: 'rgba(0,0,0,0.87)',

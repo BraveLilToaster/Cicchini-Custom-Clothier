@@ -9,5 +9,5 @@ export const transformations = {
 }
 
 export const getCloudinaryUrl = (transformations) => {
-  return `${cloudinary_base_url}/${transformations}/${cloudinary_key}/`
+  return `${cloudinary_base_url}/${transformations ? `${transformations}/`: ''}${cloudinary_key}/`
 }

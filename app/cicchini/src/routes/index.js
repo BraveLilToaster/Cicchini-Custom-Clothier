@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import Hero from '../styles/Hero'
+import ResponsivePlayer from '../components/ResponsivePlayer'
 import Container from '../styles/Container'
 import Section from '../styles/Section'
 import Slider from '../components/Slider'
@@ -13,6 +14,11 @@ import {
 } from '../styles/Typography'
 import { getCloudinaryUrl, transformations } from '../constants/cloudinary_config'
 
+const Video = {
+  url: `https://res.cloudinary.com/cicchini/video/upload/Video/Cicchini%20Video.mp4`,
+  poster: `${getCloudinaryUrl()}Video/video_poster.png`
+}
+
 const slider = [
   {
     header: 'Custom Suits',
@@ -23,25 +29,25 @@ const slider = [
     cta_text: '',
   },
   {
-    header: 'Custom Suits',
-    subheader: 'We create a suit that fits you and no one else.',
+    header: 'Custom Shirts',
+    subheader: 'You wear them everyday. Make sure they fit.',
     backgroundImage: `${getCloudinaryUrl(transformations.max_width_1280)}Hero%20Slider/Cicchini_2018_Lookbook_Photos_BCP-255.jpg`,
     imageAlign: 'top',
     cta_link: '',
     cta_text: '',
   },
   {
-    header: 'Custom Suits',
-    subheader: 'We create a suit that fits you and no one else.',
-    backgroundImage: `${getCloudinaryUrl(transformations.max_width_1280)}Hero%20Slider/Cicchini_Custom_Clothier_Photos_BCP_2016-29.jpg`,
+    header: 'Shoe Selections',
+    subheader: 'We offer a vast array of styles and brands.',
+    backgroundImage: `${getCloudinaryUrl(transformations.max_width_1280)}Hero%20Slider/Cicchini_Custom_Clothier_Photos_BCP_2016-98.jpg`,
     imageAlign: 'center',
     cta_link: '',
     cta_text: '',
   },
   {
-    header: 'Custom Suits',
-    subheader: 'We create a suit that fits you and no one else.',
-    backgroundImage: `${getCloudinaryUrl(transformations.max_width_1280)}Hero%20Slider/Cicchini_Custom_Clothier_Photos_BCP_2016-98.jpg`,
+    header: 'Casual Wear',
+    subheader: 'A variety of upscale clothing to fit your lifestyle.',
+    backgroundImage: `${getCloudinaryUrl(transformations.max_width_1280)}Hero%20Slider/Cicchini_Custom_Clothier_Photos_BCP_2016-29.jpg`,
     imageAlign: 'center',
     cta_link: '',
     cta_text: '',
@@ -52,6 +58,7 @@ const index = props => {
   return (
     <Container>
       <Slider
+        autoplay
         autoplaySpeed={3500}
         dots
         slidesToShow={1}
@@ -68,8 +75,8 @@ const index = props => {
               flex
               alignItems={'center'}
             >
-              <HeroHeader children={slide.header} />
-              <HeroSubheader children={slide.subheader} />
+              <HeroHeader children={slide.header} align={'center'} />
+              <HeroSubheader children={slide.subheader} align={'center'} />
             </Section>
           </HeroSlide>
         ))}
@@ -77,7 +84,26 @@ const index = props => {
       <Section margin={'2rem auto'} maxWidth={940}>
         <Display2
           align="center"
-          margin={'2rem 0'}
+          margin={'0 0 2rem'}
+          children={`
+            Watch the Video
+          `}
+        />
+        <ResponsivePlayer
+          url={Video.url}
+          config={{
+            file: {
+              attributes: {
+                controls: 1,
+                poster: Video.poster
+              },
+            }
+          }}
+        />
+      </Section>
+      <Section margin={'2rem auto'} maxWidth={940}>
+        <Display2
+          align="center"
           children={`
             The Cicchini Story
           `}
